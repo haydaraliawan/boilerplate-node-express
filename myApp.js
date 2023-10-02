@@ -32,8 +32,15 @@ app.get(
     }
 );
 
-app.get('/:word/echo', (req,res) => {
-    res.json({ word: req.params.word });
+// app.get("/:word/echo", (req, res) => {
+//     res.json({ word: req.params.word });
+// });
+
+app.get("/:word/echo", (req, res) => {
+    const { word } = req.params;
+    res.json({
+        echo: word,
+    });
 });
 // Route handler for /now
 
