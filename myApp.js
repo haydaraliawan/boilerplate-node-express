@@ -1,4 +1,4 @@
-require("dotenv").config();
+require('dotenv').config();
 const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
@@ -6,7 +6,7 @@ const path = require("path");
 
 // Root level middleware to log requests
 app.get("/json", function (req, res) {
-    
+    console.log(process.env.MESSAGE_STYLE);
     if (process.env.MESSAGE_STYLE === "uppercase") {
         res.json({ message: "HELLO JSON" });
     } else {
