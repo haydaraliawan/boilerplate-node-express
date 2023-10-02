@@ -3,6 +3,8 @@
  * the verification process may break
  * ***************************************************/
  
+require('dotenv').config();
+
 const bGround = require('fcc-express-bground');
 const myApp = require('./myApp');
 const express = require('express');
