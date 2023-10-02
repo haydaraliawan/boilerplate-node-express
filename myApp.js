@@ -1,4 +1,5 @@
 require("dotenv").config();
+const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -7,6 +8,11 @@ const path = require("path");
 
 // Serve static files from the "public" directory
 app.use("/public", express.static(path.join(__dirname, "public")));
+
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+// Mount the URL encoded data middleware before your routes
+app.use(urlencodedParser);
 
 // app.use((req, res, next) => {
 
@@ -35,6 +41,7 @@ app.get(
 app.get("/name", (req,res) => {
     const firstName = req.query.first;
     const lastName = req.query.last;
+    console.log(express.version);
     res.json({ name: firstName+ " "+ lastName });
 });
 
