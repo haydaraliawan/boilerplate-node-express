@@ -1,26 +1,30 @@
 require("dotenv").config();
-let express = require("express");
-let app = express();
+const express = require("express");
+const app = express();
 const path = require("path");
-// let absolutePath = path.join(__dirname, '/views/index.html');
+
+// Root level middleware to log requests
 app.use((req, res, next) => {
-    const logString = `${req.method} ${req.path} - ${req.ip}`;
-    console.log(logString);
-    next();
+  const logString = `${req.method} ${req.path} - ${req.ip}`;
+  console.log(logString);
+  next();
 });
+
+// Serve static files from the "public" directory
 app.use("/public", express.static(path.join(__dirname, "public")));
+
+// Define routes
 app.get("/", function (req, res) {
-    res.sendFile(__dirname + "/views/index.html");
+  res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
 app.get("/json", function (req, res) {
-    let resObj = { message: "Hello json" };
-    console.log(process.env.MESSAGE_STYLE);
-    if (process.env.MESSAGE_STYLE == "uppercase") {
-        res.json({ message: "HELLO JSON" });
-    } else {
-        res.json({ message: "Hello json" });
-    }
+  let resObj = { message: "Hello json" };
+  if (process.env.MESSAGE_STYLE === "uppercase") {
+    res.json({ message: "HELLO JSON" });
+  } else {
+    res.json({ message: "Hello json" });
+  }
 });
 
 module.exports = app;
