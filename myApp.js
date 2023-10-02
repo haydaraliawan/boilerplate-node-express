@@ -32,9 +32,11 @@ app.get(
     }
 );
 
-// app.get("/:word/echo", (req, res) => {
-//     res.json({ word: req.params.word });
-// });
+app.get("/name", (req,res) => {
+    const firstName = req.query.firstName;
+    const lastName = req.query.lastName;
+    res.json({ name: firstName+ " "+ lastName });
+});
 
 app.get("/:word/echo", (req, res) => {
     const { word } = req.params;
